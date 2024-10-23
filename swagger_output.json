@@ -1,0 +1,299 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Cluster Communication REST API",
+    "description": ""
+  },
+  "host": "api-communication-application.hilalcart.com",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/api/chat/": {
+      "get": {
+        "description": "indexing all chats of user in home screen | user token must be passed |",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "creating chats with users",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required":true
+          },
+          {
+            "name":"requestBody",
+            "in":"body",
+            "type":"object",
+            "properties":{
+              "friendId":{
+                "type":"string",
+                "definition":"code of user"
+              }
+            },
+            "required":true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/chat/{id}": {
+      "delete": {
+        "description": "delete a chat with chatid",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/chat/search/{term}": {
+      "get": {
+        "description": "search api ",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/chat/messages/{chatid}": {
+      "get": {
+        "description": "retrieve messages by passing chatId",
+        "parameters": [
+          {
+            "name": "chatid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "description": "login api ",
+        "parameters": [
+          {
+            "name":"requestBody",
+            "in":"body",
+            "type":"object",
+            "properties":{
+              "username":{
+                "type":"string",
+                "description":"username of user"
+              },
+              "password":{
+                "type":"string",
+                "description":"password of user"
+              }
+            },
+            "required":true
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "description": "register api",
+        "parameters": [
+          {
+            "name":"requestBody",
+            "in":"body",
+            "type":"object",
+            "properties":{
+              "email":{
+                "type": "string",
+                "description": " email of a user "
+              },
+              "username":{
+                "type": "string",
+                "description": " username of user "
+              },
+              "password":{
+                "type": "string",
+                "description": " password of user "
+              }
+            },
+            "required":true
+          }                    
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/chat/create/group":{
+      "post": {
+        "description": "group creation api",
+        "parameters": [
+          {
+            "name":"requestBody",
+            "in":"body",
+            "type":"object",
+            "properties":{
+              "name":{
+                "type": "string",
+                "description": "name of group"
+              },
+              "friends":{
+                "type": "Array",
+                "description": "Array of userid's"
+              }
+            },
+            "required":true
+          }                    
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+           "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }     
+    },
+    "/api/chat/users/list":{
+      "get": {
+        "description": "users list",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }                   
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+           "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }  
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "apps" : [
+       {
+          "name"          : "communication",
+          "script"        : "npm",
+          "args"          : "run start",
+          "watch"         : true,
+          "cwd"           : "/opt/communication/communication-teams/",
+          "out_file"      : "/opt/communication_logs/communication.out.log",
+          "err_file"      : "/opt/communication_logs/communication.err.log",
+          "merge_logs"    : true,
+          "instances"     : 3,
+          "exec_mode"     : "cluster"
+       }
+    ]
+}
